@@ -23,13 +23,25 @@ function submitForm(e) {
 
     saveMessages(name, emailid, msgContent);
 
-    document.querySelector('.alert').style.display = "block";
+    
 
-    setTimeout(() => {
-        document.querySelector('.alert').style.display = "none";
-    }, 3000)
+    if (name.length>4) {
+        document.querySelector('.alert').style.display = "block";
 
-    document.getElementById("contactForm").reset()
+        setTimeout(() => {
+            document.querySelector('.alert').style.display = "none";
+        }, 3000)
+    
+        document.getElementById("contactForm").reset()
+        
+    } else {
+        document.querySelector('.alerts').style.display = "block";
+
+        setTimeout(() => {
+            document.querySelector('.alerts').style.display = "none";
+        }, 3000)
+        
+    }
 }
 
 const saveMessages = (name, emailid, msgContent) => {

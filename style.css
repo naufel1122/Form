@@ -42,10 +42,18 @@ body {
     font-weight: 600;
     cursor: pointer;
 }
+.alerts {
+  width: 100%;
+  background: rgb(255, 3, 3);
+  border-radius: 5px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 900;
+  display: none;
+}
 .alert {
   width: 100%;
   background: rgb(0, 255, 106);
-  padding: 3px;
   border-radius: 5px;
   text-align: center;
   font-size: 18px;
