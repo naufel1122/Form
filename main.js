@@ -23,24 +23,24 @@ function submitForm(e) {
 
     saveMessages(name, emailid, msgContent);
 
-    
 
-    if (name.length>4) {
+
+    if (name.length > 4) {
         document.querySelector('.alert').style.display = "block";
 
         setTimeout(() => {
             document.querySelector('.alert').style.display = "none";
         }, 3000)
-    
+
         document.getElementById("contactForm").reset()
-        
+
     } else {
         document.querySelector('.alerts').style.display = "block";
 
         setTimeout(() => {
             document.querySelector('.alerts').style.display = "none";
         }, 3000)
-        
+
     }
 }
 
