@@ -47,6 +47,7 @@
         background-image: linear-gradient(45deg, purple, rgb(206, 11, 206));
         font-size: 18px;
     }
+
     .google {
         width: 100%;
         margin-top: 10px;
@@ -54,8 +55,9 @@
         padding: 5px;
         background-color: #fff;
         border: none;
-    } 
+    }
 </style>
+
 <body>
     <div class="container">
         <form name="registration_form" id="registration_form" method="post" action="#" enctype="multipart/form-data">
@@ -72,8 +74,10 @@
                             placeholder="Enter your password">
                     </div>
                     <span>Already Have an Account <a href="./login.html">Login</a></span><br><br>
-                    <button type="button" id="register" name="register" class="btn btn-success">Register Now</button><br>
-                    <button class="google" type="button" id="loginwithgoogle"><img class="googleimg" height="35rem" width="100rem" src="./google full.png"></button>
+                    <button type="button" id="register" name="register" class="btn btn-success">Register
+                        Now</button><br>
+                    <button class="google" type="button" id="loginwithgoogle"><img class="googleimg" height="35rem"
+                            width="100rem" src="./google full.png"></button>
                 </div><!-- end col -->
         </form>
     </div>
@@ -81,7 +85,7 @@
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -102,8 +106,35 @@
         const analytics = getAnalytics(app);
         const auth = getAuth();
         console.log(app);
+        const provider = new GoogleAuthProvider();
 
+        let loginwithgoogle = document.querySelector("#loginwithgoogle")
+        loginwithgoogle.addEventListener("click", () => {
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    // This gives you a Google Access Token. You can use it to access the Google API.
+                    const credential = GoogleAuthProvider.credentialFromResult(result);
+                    const token = credential.accessToken;
+                    // The signed-in user info.
+                    const user = result.user;
+                    alert("google login successful")
+                    window.location.href = "./public/index.html"
+                    // IdP data available using getAdditionalUserInfo(result)
+                    // ...
+                }).catch((error) => {
+                    // Handle Errors here.
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    // The email of the user's account used.
+                    const email = error.customData.email;
+                    // The AuthCredential type that was used.
+                    const credential = GoogleAuthProvider.credentialFromError(error);
+                    alert("google login error")
+                    // window.location.href = "./public/index.html"
+                    // ...
+                });
 
+        })
 
         //----- New Registration code start	  
         document.getElementById("register").addEventListener("click", function () {
@@ -115,7 +146,7 @@
                     // Signed in 
                     const user = userCredential.user;
                     console.log(user);
-                    window.location.href= './login.html'
+                    window.location.href = './login.html'
                     // alert("Registration successfully!!");
                     // ...
                 })
@@ -129,28 +160,7 @@
         });
         //----- End
 
-        //----- Login code start	  
-        // document.getElementById("login").addEventListener("click", function () {
-        //     var email = document.getElementById("login_email").value;
-        //     var password = document.getElementById("login_password").value;
 
-        //     signInWithEmailAndPassword(auth, email, password)
-        //         .then((userCredential) => {
-        //             // Signed in 
-        //             const user = userCredential.user;
-        //             console.log(user);
-        //             alert(user.email + " Login successfully!!!");
-        //             document.getElementById('logout').style.display = 'block';
-        //             // ...
-        //         })
-        //         .catch((error) => {
-        //             const errorCode = error.code;
-        //             const errorMessage = error.message;
-        //             console.log(errorMessage);
-        //             alert(errorMessage);
-        //         });
-        // });
-        //----- End
 
         //----- Logout code start	  
         document.getElementById("logout").addEventListener("click", function () {
