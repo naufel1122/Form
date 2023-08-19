@@ -20,7 +20,7 @@ const db = firebase.firestore();
 
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 let button = document.getElementById("button");
-button.addEventListener("click", function () {
+button.addEventListener("click", function() {
   // Get the values of the title and text fields
   const tittle = document.getElementById("tittle").value;
   const text = document.getElementById("input").value;
@@ -33,6 +33,7 @@ button.addEventListener("click", function () {
       text: text,
       // userId: userId
     })
+    
     .then(() => {
       console.log("Message added successfully");
       rendermsg(); // Refresh the messages
@@ -46,86 +47,86 @@ button.addEventListener("click", function () {
   document.getElementById("input").value = "";
 });
 function rendermsg() {
-  const container = document.querySelector(".main");
+ const container = document.querySelector(".main");
 
-  db.collection("Blogs")
-    .orderBy("timestamp", "desc")
-    .get()
-    .then((querySnapshot) => {
-      container.innerHTML = "";
+ db.collection("Blogs")
+   .orderBy("timestamp", "desc")
+   .get()
+   .then((querySnapshot) => {
+     container.innerHTML = "";
 
-      if (querySnapshot.empty) {
-        container.innerText = "No chat found";
-      } else {
-        const reversedDocs = querySnapshot.docs.reverse();
+     if (querySnapshot.empty) {
+       container.innerText = "No chat found";
+     } else {
+       const reversedDocs = querySnapshot.docs.reverse();
 
-        reversedDocs.forEach((doc) => {
-          const data = doc.data();
-          //iske ander sab he
-          const maindiv = document.createElement("div");
-          maindiv.className = "datamain"
-          container.appendChild(maindiv)
-          //isme pic or tittel niche nam
-          const tittlediv = document.createElement("div")
-          tittlediv.className = "tittlediv"
-          maindiv.appendChild(tittlediv);
-          //image ka div
-          const imagediv = document.createElement("div");
-          imagediv.className = "imagediv";
-          tittlediv.appendChild(imagediv);
+       reversedDocs.forEach((doc) => {
+         const data = doc.data();
+//iske ander sab he
+         const maindiv = document.createElement("div");
+         maindiv.className = "datamain"
+         container.appendChild(maindiv)
+//isme pic or tittel niche nam
+         const tittlediv = document.createElement("div")
+         tittlediv.className = "tittlediv"
+         maindiv.appendChild(tittlediv);
+//image ka div
+const imagediv = document.createElement("div");
+imagediv.className = "imagediv";
+tittlediv.appendChild(imagediv);
 
-          // Create an icon (avatar) element
-          const imagee = document.createElement("i");
-          imagee.className = "bi bi-person-lines-fill";
-          imagee.id = "iid";
-          imagediv.appendChild(imagee);
+// Create an icon (avatar) element
+const imagee = document.createElement("i");
+imagee.className = "bi bi-person-lines-fill";
+imagee.id = "iid";
+imagediv.appendChild(imagee);
 
-          //tittele div me ab name
+//tittele div me ab name
 
-          username = document.createElement("h2")
-          username.className = "userdata"
-          username.innerText = data.tittle
-          tittlediv.appendChild(username)
+username= document.createElement("h2")
+username.className = "userdata"
+username.innerText= data.tittle
+tittlediv.appendChild(username)
 
-          //time dhlwani he 
-          timediv = document.createElement("p")
-          timediv.className = "timediv"
-          timediv.innerText = data.timestamp
-
-
-
-          // AB MUJHA BLOG KI DIV BANANI HE 
-
-          blogdiv = document.createElement('div')
-          blogdiv.className = "blogdiv"
-          blogdiv.innerText = data.text
+//time dhlwani he 
+timediv = document.createElement("p")
+timediv.className = "timediv"
+timediv.innerText = data.timestamp
 
 
 
-          //    del1.addEventListener("click", () => deletePoll(doc.id));
-          //    foter.appendChild(del1);
+// AB MUJHA BLOG KI DIV BANANI HE 
+
+blogdiv = document.createElement('div')
+blogdiv.className = "blogdiv"
+blogdiv.innerText = data.text
 
 
+         
+      //    del1.addEventListener("click", () => deletePoll(doc.id));
+      //    foter.appendChild(del1);
 
-          // Attach the editPoll function to the "Edit" button
-          //            editButton.addEventListener("click", () => {
-          //              editPoll(doc.id);
-          //            });
-          container.insertBefore(maindiv, container.firstChild);
+        
 
-        });
-      }
-    })
+         // Attach the editPoll function to the "Edit" button
+//            editButton.addEventListener("click", () => {
+//              editPoll(doc.id);
+//            });
+     container.insertBefore(maindiv, container.firstChild);
+         
+ });
+   }
+ })
     .catch((error) => {
-      console.error("Error fetching chat:", error);
-    });
+ console.error("Error fetching chat:", error);
+  });
 }
 
 
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  rendermsg();
+rendermsg();
 });
 
 
@@ -133,45 +134,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function editPoll(docId) {
-  currentUser = auth.currentUser; // Assign the current user to the global variable
-  if (!currentUser) {
-    alert("Please log in to edit this post.");
-    return;
-  }
+currentUser = auth.currentUser; // Assign the current user to the global variable
+if (!currentUser) {
+  alert("Please log in to edit this post.");
+  return;
+}
 
-  // Get the post document using the provided docId
-  db.collection("Blogs")
-    .doc(docId)
-    .get()
-    .then((doc) => {
-      // Get the data from the post document
-      const data = doc.data();
+// Get the post document using the provided docId
+db.collection("Blogs")
+  .doc(docId)
+  .get()
+  .then((doc) => {
+    // Get the data from the post document
+    const data = doc.data();
 
-      // Check if the current user is the author of the post
-      if (currentUser.uid === data.userId) {
-        const updatedMessage = prompt("Enter the updated message:");
-        if (updatedMessage !== null) {
-          db.collection("Blogs")
-            .doc(docId)
-            .update({
-              message: updatedMessage
-            })
-            .then(() => {
-              console.log("Document updated with ID:", docId);
-              rendermsg(); // Refresh the posts to update the UI
-            })
-            .catch((error) => {
-              console.error("Error updating poll:", error);
-            });
-        }
-      } else {
-        // If the current user is not the author, show an alert
-        alert("You are not authorized to edit this post.");
+    // Check if the current user is the author of the post
+    if (currentUser.uid === data.userId) {
+      const updatedMessage = prompt("Enter the updated message:");
+      if (updatedMessage !== null) {
+        db.collection("Blogs")
+          .doc(docId)
+          .update({
+            message: updatedMessage
+          })
+          .then(() => {
+            console.log("Document updated with ID:", docId);
+            rendermsg(); // Refresh the posts to update the UI
+          })
+          .catch((error) => {
+            console.error("Error updating poll:", error);
+          });
       }
-    })
-    .catch((error) => {
-      console.error("Error fetching document from Firestore: ", error);
-    });
+    } else {
+      // If the current user is not the author, show an alert
+      alert("You are not authorized to edit this post.");
+    }
+  })
+  .catch((error) => {
+    console.error("Error fetching document from Firestore: ", error);
+  });
 }
 
 function rendermsg() {
@@ -208,6 +209,11 @@ function rendermsg() {
           timestampElement.innerText = data.timestamp;
           blogPostDiv.appendChild(timestampElement);
 
+          const img =document.createElement('img')
+          img.src = data.img;//Assuming 'data.img'holds the url of the image
+          blogPostDiv.appendChild(img);
+
+
           // Append the blog post div to the container
           container.appendChild(blogPostDiv);
         });
@@ -217,3 +223,22 @@ function rendermsg() {
       console.error("Error fetching chat:", error);
     });
 }
+
+
+
+
+// ===============================
+
+
+
+let signout = document.getElementById('signout');
+signout.addEventListener("click",function(){
+  firebase.auth().signOut().then(function(){
+    // Signout Successfull
+    console.log("user signed out successfully");
+    window.location.href = '../login.html'
+    // you  can add any additional acctions you want to perform afer sign 
+  }).catch(function(error){
+    console.log("sign-out error:",error);
+  })
+})
