@@ -1,0 +1,106 @@
+body{
+        background-color: #f8f9fa;
+}
+.navhead{
+  height: 40px;
+  min-width: 100%;
+  background-color: #7749f8;
+  display: flex;
+  justify-content: space-around;
+}
+
+.navhead .personal{
+  /* padding: 20px; */
+  font-size: 25px;
+  color:#fff;
+}
+.navhead p{
+  color: white;
+  font-size: 20px;
+}
+.pere{
+  display: flex ;
+  gap: 30px;
+}
+.navhead .btn{
+  text-decoration: none;
+  /* margin-bottom: 10px; */
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 0.4rem;
+  height: 38px;
+  /* margin-top: 3px; */
+
+}
+.navhead .btn a{
+  color: #fff;
+  text-decoration: none;
+}
+.second {
+  height:112px;
+  min-width: 100%;
+  background-color: #ffffff;
+  padding: 30px;
+}
+.second p{
+  font-size: 32px;
+  font-weight: 900;
+  /* padding: 30px; */
+  margin-left: 70px;
+}
+.heading{
+  margin-top: 100px;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 900;
+}
+.main{
+  border-radius: 20px;
+  background-color: #7749f8;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding :30px 30px;
+}
+ .main .blog-post{
+  padding: 50px;
+  background-color: #fff;
+  margin-top: 20px;
+  border-radius: 20px;
+/* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+ }
+.none{
+  height: 500px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.button {
+width: 100%;
+height: 100%;
+background-color: #7749f8;
+border-radius: 20px;
+box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.button .text #tittle{
+  width: 90%;
+  height: 40px;
+  border-radius: 15px;
+}
+.button .text #input{
+  width: 90%;
+  height: 300px;
+  border-radius: 20px;
+}
+#button{
+  margin-top: 15px;
+  height: 40px;
+  width: 200px;
+  border-radius: 20px;
+  font-size: 18px;
+  font-weight: 900;
+  background-color: #f8f9fa;
+}

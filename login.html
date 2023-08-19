@@ -15,6 +15,39 @@
     <title>Document</title>
 </head>
 <style>
+      body{
+        background-color: #f8f9fa;
+    }
+    .top{
+        height: 40px;
+        min-width: 100%;
+        background-color: #7749f8;
+        display: flex;
+        justify-content: space-around;
+    }
+    .top p{
+        /* padding: 20px; */
+        font-size: 25px;
+        color:#fff;
+    }
+    .top a{
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: 8px;
+    }
+    .second {
+        height:112px;
+        min-width: 100%;
+        background-color: #ffffff;
+        padding: 30px;
+    }
+    .second p{
+        font-size: 32px;
+        font-weight: 900;
+        /* padding: 30px; */
+        margin-left: 70px;
+    }
     .container {
         display: flex;
         justify-content: center;
@@ -24,10 +57,11 @@
     }
 
     #login_form {
-        height: 450px;
-        width: 600px;
-        background-color: antiquewhite;
-        padding: 10px 30px;
+        height: 350px;
+        width: 500px;
+        background-color: #ffffff;
+        /* padding: 10px 40px; */
+        padding: 50px;
         border-radius: 20px;
         box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
     }
@@ -49,13 +83,21 @@
 
     #login_form .col-sm-12 button {
         width: 100%;
-        background-image: linear-gradient(45deg, purple, rgb(206, 11, 206));
+        background-color: #7749f8;
+        /* background-image: linear-gradient(45deg, purple, rgb(206, 11, 206)); */
         font-size: 18px;
     }
 </style>
 
 <body>
-    <div class="navbar navbar-default">
+    <div class="top">
+        <p>Personal Blogging App</p>
+        <a href="./sign.html">SignUp</a>
+    </div>
+    <div class="second">
+        <p>Login</p>
+    </div>
+    <!-- <div class="navbar navbar-default">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse"
                 aria-expanded="false" aria-controls="navbar">
@@ -65,18 +107,12 @@
                 <span class="icon-bar"></span>
             </button>
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" id="logout" style="display: none;">Log Out</a></li>
-            </ul>
-        </div>
-    </div>
-
+    </div> -->
+y
     <!-- =========== -->
     <div class="container">
         <form name="login_form" id="login_form" method="post" action="#" enctype="multipart/form-data">
             <div class="col-sm-12 md-8 lg-4">
-                <h1>Login</h1>
                 <div class="form-group">
                     <label for="email">Email Address</label>
                     <input type="text" name="login_email" id="login_email" class="form-control"
